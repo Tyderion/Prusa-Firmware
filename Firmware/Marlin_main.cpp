@@ -5597,10 +5597,12 @@ if(eSoundMode!=e_SOUND_MODE_SILENT)
                 SERIAL_PROTOCOLPGM("\nZ search height: ");
                 SERIAL_PROTOCOL(MESH_HOME_Z_SEARCH);
                 SERIAL_PROTOCOLLNPGM("\nMeasured points:");
+
+                float midPoint = mbl.z_values[((MESH_NUM_Y_POINTS+1)/2)-1][((MESH_NUM_Y_POINTS+1)/2)-1];
                 for (uint8_t y = MESH_NUM_Y_POINTS; y-- > 0;) {
                     for (uint8_t x = 0; x < MESH_NUM_X_POINTS; x++) {
                         SERIAL_PROTOCOLPGM("  ");
-                        SERIAL_PROTOCOL_F(mbl.z_values[y][x], 5);
+                        SERIAL_PROTOCOL_F(mbl.z_values[y][x] - midPoint, 5);
                     }
                     SERIAL_PROTOCOLLN();
                 }
